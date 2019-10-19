@@ -1,5 +1,17 @@
 import { User } from './models/User';
 
+// const user = new User({ id: 1, name: 'newest name', age: 101 });
+
+// console.log(user.get('id'));
+
+const user = User.buildUser({ id: 1 });
+
+user.on('change', () => {
+  console.log(user);
+});
+
+user.fetch();
+
 // ********* DB TEST *********
 
 // const user = new User({ id: 1 });
