@@ -1,16 +1,17 @@
-import { User } from './models/User';
+// import { User } from './models/User';
+// import axios, { AxiosResponse } from 'axios';
 
 // const user = new User({ id: 1, name: 'newest name', age: 101 });
 
 // console.log(user.get('id'));
 
-const user = User.buildUser({ id: 1 });
+// const user = User.buildUser({ id: 1 });
 
-user.on('change', () => {
-  console.log(user);
-});
+// user.on('change', () => {
+//   console.log(user);
+// });
 
-user.fetch();
+// user.fetch();
 
 // ********* DB TEST *********
 
@@ -26,6 +27,10 @@ user.fetch();
 
 // const newUser = new User({ name: 'second', age: 30 });
 // newUser.save();
+
+// axios.get('http://localhost:3000/users').then((response: AxiosResponse) => {
+//   console.log(response.data);
+// });
 
 // ********* TRIGGER TEST *********
 
@@ -61,3 +66,21 @@ user.fetch();
 //   name: 'myname',
 //   age: 20,
 // });
+
+//  ********* COLLECTION Test *********
+// import { Collection } from './models/Collection';
+// import { User, UserProps } from './models/User';
+import { User } from './models/User';
+
+// const collection = new Collection<User, UserProps>(
+//   'http://localhost:3000/users',
+//   (json: UserProps) => User.buildUser(json)
+// );
+
+const collection = User.buildUserCollection();
+
+collection.on('change', () => {
+  console.log(collection);
+});
+
+collection.fetch();
