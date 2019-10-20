@@ -70,17 +70,31 @@
 //  ********* COLLECTION Test *********
 // import { Collection } from './models/Collection';
 // import { User, UserProps } from './models/User';
-import { User } from './models/User';
-
 // const collection = new Collection<User, UserProps>(
 //   'http://localhost:3000/users',
 //   (json: UserProps) => User.buildUser(json)
 // );
 
-const collection = User.buildUserCollection();
+// import { User } from './models/User';
+// const collection = User.buildUserCollection();
 
-collection.on('change', () => {
-  console.log(collection);
-});
+// collection.on('change', () => {
+//   console.log(collection);
+// });
 
-collection.fetch();
+// collection.fetch();
+
+//  ********* UserForm Test *********
+
+import { UserFrom } from './views/UserForm';
+import { User } from './models/User';
+
+const user = User.buildUser({ name: 'UserForm', age: 25 });
+
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  const userForm = new UserFrom(rootElement, user);
+  userForm.render();
+} else {
+  throw new Error('No root element found.');
+}
