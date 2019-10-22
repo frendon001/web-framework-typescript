@@ -19,11 +19,9 @@ export class Collection<T, K> {
   fetch(): void {
     axios.get(this.rootUrl).then((response: AxiosResponse) => {
       for (const value of response.data) {
-        // const user = T.buildUser(value as K);
         this.models.push(this.deserialize(value as K));
       }
+      this.trigger('change');
     });
-
-    this.trigger('change');
   }
 }

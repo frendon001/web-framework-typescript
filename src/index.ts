@@ -86,16 +86,37 @@
 
 //  ********* UserEdit Test *********
 
-import { UserEdit } from './views/UserEdit';
-import { User } from './models/User';
+// import { UserEdit } from './views/UserEdit';
+// import { User } from './models/User';
 
-const user = User.buildUser({ name: 'UserEdit', age: 25 });
+// const user = User.buildUser({ name: 'UserEdit', age: 25 });
 
-const rootElement = document.getElementById('root');
-if (rootElement) {
-  const userEdit = new UserEdit(rootElement, user);
-  userEdit.render();
-  console.log(userEdit);
-} else {
-  throw new Error('No root element found.');
-}
+// const rootElement = document.getElementById('root');
+// if (rootElement) {
+//   const userEdit = new UserEdit(rootElement, user);
+//   userEdit.render();
+//   console.log(userEdit);
+// } else {
+//   throw new Error('No root element found.');
+// }
+
+//  ********* UserList Test *********
+import { UserList } from './views/UserList';
+import { Collection } from './models/Collection';
+import { User, UserProps } from './models/User';
+
+const users = new Collection(
+  'http://localhost:3000/users',
+  (json: UserProps) => {
+    return User.buildUser(json);
+  }
+);
+
+users.on('change', () => {
+  const root = document.getElementById('root');
+  if (root) {
+    new UserList(root, users).render();
+  }
+});
+
+users.fetch();
