@@ -84,17 +84,18 @@
 
 // collection.fetch();
 
-//  ********* UserForm Test *********
+//  ********* UserEdit Test *********
 
-import { UserFrom } from './views/UserForm';
+import { UserEdit } from './views/UserEdit';
 import { User } from './models/User';
 
-const user = User.buildUser({ name: 'UserForm', age: 25 });
+const user = User.buildUser({ name: 'UserEdit', age: 25 });
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
-  const userForm = new UserFrom(rootElement, user);
-  userForm.render();
+  const userEdit = new UserEdit(rootElement, user);
+  userEdit.render();
+  console.log(userEdit);
 } else {
   throw new Error('No root element found.');
 }
